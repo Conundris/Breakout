@@ -39,7 +39,6 @@ public class MainGameScreen implements Screen {
         this.cam = new OrthographicCamera(Board.BOARD_WIDTH, Board.BOARD_HEIGHT);
         this.cam.setToOrtho(false, Board.BOARD_WIDTH, Board.BOARD_HEIGHT);
         Gdx.app.debug("Test", "HAI");
-        //this.reset();
     }
 
     @Override

@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.breakout.ca2016.Breakout;
+import com.breakout.ca2016.Screens.BrickRenderer;
 
 public class Board
 {
@@ -18,6 +19,7 @@ public class Board
     public Breakout game;
     public Paddle paddle;
     public Ball ball;
+    public BrickRenderer bricks;
 
     // other
     public int destroyedBricks = 0;
@@ -34,6 +36,7 @@ public class Board
     {
         this.game = game;
         this.paddle = new Paddle(this);
+        this.bricks = new BrickRenderer(this, 20);
 
         // local properties
         this.batch = new SpriteBatch();
@@ -44,9 +47,9 @@ public class Board
     public void render(SpriteBatch batch, OrthographicCamera cam)
     {
         this.paddle.render(batch, cam);
+        this.bricks.render(batch, cam);
 
         this.batch.begin();
-        this.renderPlayerBalls();
         this.renderPlayerScore();
         this.batch.end();
     }
@@ -54,13 +57,6 @@ public class Board
     public void update(float delta)
     {
         this.paddle.update(delta);
-    }
-
-
-    private void renderPlayerBalls()
-    {
-        this.font.setColor(Color.GRAY);
-        this.font.draw(this.batch, "Balls: " + this.balls, 20f, 20f);
     }
 
     private void renderPlayerScore()

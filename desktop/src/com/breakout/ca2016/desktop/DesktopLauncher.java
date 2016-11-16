@@ -12,8 +12,8 @@ public class DesktopLauncher {
 
 		config.title = "Breakout";
 		config.useGL30 = false;
-		config.width = 800;
-		config.height = 600;
+		config.width = 1000;
+		config.height = 1200;
 
 		Application app = new LwjglApplication(new Breakout(), config);
 
