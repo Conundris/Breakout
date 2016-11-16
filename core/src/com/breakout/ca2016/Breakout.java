@@ -1,12 +1,7 @@
 package com.breakout.ca2016;
 
-import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Game;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class Breakout extends Game {
 
@@ -20,13 +15,13 @@ public class Breakout extends Game {
 			case MainGame:
 				return mainGameScreen;
 			default:
-				return mainMenuScreen;
+				return mainGameScreen;
 		}
-
 	}
 
 	@Override
 	public void create () {
+		// Creating Screens
 		mainGameScreen = new MainGameScreen(this);
 		mainMenuScreen = new MainMenuScreen(this);
 		setScreen(mainMenuScreen);
@@ -34,6 +29,7 @@ public class Breakout extends Game {
 
 	@Override
 	public void render () {
+		super.render();
 	}
 	
 	@Override

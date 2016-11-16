@@ -5,13 +5,15 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.breakout.ca2016.Actor.Ball;
-import com.breakout.ca2016.Actor.Brick;
-import com.breakout.ca2016.Actor.Paddle;
+import com.breakout.ca2016.Entities.Ball;
+import com.breakout.ca2016.Entities.Board;
+import com.breakout.ca2016.Entities.Brick;
+import com.breakout.ca2016.Entities.Paddle;
 
 import java.util.ArrayList;
 
@@ -21,18 +23,10 @@ import java.util.ArrayList;
 public class MainGameScreen implements Screen {
 
     private Breakout game;
-    private OrthographicCamera camera;
+    private OrthographicCamera cam;
     private SpriteBatch batch;
-    private Stage breakoutStage;
-    private Ball ball;
-    private Paddle paddle;
-    private World world;
-    private Box2DDebugRenderer debugRenderer;
-    private boolean debug = false;
-    private boolean[] keys = new boolean[4];
-    //private BreakoutContactListener contactListener;
-    private ArrayList<Brick> bricks = new ArrayList<>();
-    private Vector2 worldToScreen;
+
+    public Board board;
 
     public MainGameScreen(Breakout game) {
         this.game = game;
@@ -40,13 +34,12 @@ public class MainGameScreen implements Screen {
     }
 
     private void init() {
-        camera = new OrthographicCamera();
-        camera.setToOrtho(false, 800, 480);
-
-        breakoutStage = new Stage();
-
-        world = new World(new Vector2(0f, 0f), true);
-        debugRenderer = new Box2DDebugRenderer();
+        this.board = new Board(game);
+        this.batch = new SpriteBatch();
+        this.cam = new OrthographicCamera(Board.BOARD_WIDTH, Board.BOARD_HEIGHT);
+        this.cam.setToOrtho(false, Board.BOARD_WIDTH, Board.BOARD_HEIGHT);
+        Gdx.app.debug("Test", "HAI");
+        //this.reset();
     }
 
     @Override
@@ -55,10 +48,24 @@ public class MainGameScreen implements Screen {
     }
 
     @Override
-    public void render(float delta) {
-        Gdx.gl.glClearColor(0.1137f, 0.16f, 0.145f, 1f);
+    public void render(float delta)
+    {
+        // clear the screen
+        Gdx.gl.glClearColor(0.1f, 0.1f, 0.1f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+        // start the updating...
+        updateGame(delta);
+        this.board.render(this.batch, this.cam);
+        cam.update();
+
     }
+
+    public void updateGame(float delta)
+    {
+        this.board.update(delta);
+    }
+
 
     @Override
     public void resize(int width, int height) {
