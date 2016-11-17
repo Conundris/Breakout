@@ -38,12 +38,12 @@ public class Board
     {
         this.game = game;
         this.paddle = new Paddle(this);
+        this.ball = new Ball(this);
         this.bricks = new BrickRenderer(this, 20);
 
         // local properties
         this.batch = new SpriteBatch();
         this.font = new BitmapFont();
-        ball = null;
 
         Gdx.input.setInputProcessor(new PaddleController(this));
     }
@@ -51,6 +51,7 @@ public class Board
     public void render(SpriteBatch batch, OrthographicCamera cam)
     {
         this.paddle.render(batch, cam);
+        this.ball.render(batch, cam);
         this.bricks.render(batch, cam);
 
         this.batch.begin();
@@ -61,6 +62,7 @@ public class Board
     public void update(float delta)
     {
         this.paddle.update(delta);
+        //this.ball.upd
     }
 
     private void renderPlayerScore()

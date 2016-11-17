@@ -8,8 +8,8 @@ import com.badlogic.gdx.math.Vector2;
  * Created by t00191944 on 16/11/2016.
  */
 public class Brick {
-    public static final float WIDTH = .5f;
-    public static final float HEIGHT = .2f;
+    public static final float WIDTH = .4f;
+    public static final float HEIGHT = .3f;
 
     private boolean destroyed = false;
     public boolean isDestroyed() {return this.destroyed; }

@@ -53,7 +53,7 @@ public class BrickRenderer {
     private Brick[] generateBlocks(int count)
     {
         float x = 0 + .5f;
-        float y = Board.BOARD_HEIGHT - 2f;
+        float y = Board.BOARD_HEIGHT - 1f;
         Brick[] temp = new Brick[count];
         for (int i = 0; i < count; i++)
         {

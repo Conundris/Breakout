@@ -5,17 +5,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
-import com.badlogic.gdx.physics.box2d.World;
-import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.breakout.ca2016.Entities.Ball;
 import com.breakout.ca2016.Entities.Board;
-import com.breakout.ca2016.Entities.Brick;
-import com.breakout.ca2016.Entities.Paddle;
-
-import java.util.ArrayList;
 
 /**
  * Created by t00191944 on 15/11/2016.
@@ -38,7 +28,6 @@ public class MainGameScreen implements Screen {
         this.batch = new SpriteBatch();
         this.cam = new OrthographicCamera(Board.BOARD_WIDTH, Board.BOARD_HEIGHT);
         this.cam.setToOrtho(false, Board.BOARD_WIDTH, Board.BOARD_HEIGHT);
-        Gdx.app.debug("Test", "HAI");
     }
 
     @Override

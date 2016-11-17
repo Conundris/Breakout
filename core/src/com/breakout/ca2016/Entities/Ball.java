@@ -4,9 +4,12 @@ package com.breakout.ca2016.Entities;
  * Created by t00191944 on 16/11/2016.
  */
 
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Pool;
@@ -19,6 +22,7 @@ public class Ball {
     private static float SPEED = 2f;
     private float max_vel = 5f;
     private float ACCELERATION = 40f;
+    private float radius = .2f;
 
     private Vector2 velocity = new Vector2();
     public Vector2 getVelocity() { return this.velocity; }
@@ -29,8 +33,8 @@ public class Ball {
     private Vector2 position;
     public Vector2 getPosition() { return this.position; }
 
-    private Rectangle bounds;
-    public Rectangle getBounds() { return this.bounds; }
+    private Circle bounds;
+    public Circle getBounds() { return this.bounds; }
 
     private float ballSpeed;
     public float getBallSpeed() { return this.ballSpeed; }
@@ -53,14 +57,14 @@ public class Ball {
         }
     };
 
-    public Ball(Board board, boolean debug)
+    public Ball(Board board)
     {
         this.board = board;
         this.ballSpeed = SPEED;
-        this.debug = debug;
 
         this.position = getInitalPosition();
-        this.bounds = new Rectangle(this.position.x, this.position.y, SIZE, SIZE);
+        this.bounds = new Circle(this.position.x, this.position.y, this.radius);
+        //this.bounds = new Rectangle(this.position.x, this.position.y, SIZE, SIZE);
         this.renderer = new ShapeRenderer();
 
 
@@ -72,8 +76,20 @@ public class Ball {
 
     // Get inital Position where Ball will be rendered
     private Vector2 getInitalPosition() {
-        float x = 0;
-        float y = 0;
+        float x = 6;
+        float y = 6;
         return new Vector2(x,y);
+    }
+
+    public void render(SpriteBatch batch, OrthographicCamera cam)
+    {
+        this.renderer.setProjectionMatrix(cam.combined);
+        this.renderer.begin(ShapeRenderer.ShapeType.Filled);
+        this.renderer.setColor(Color.GREEN);
+        /*this.renderer.circle(this.getPosition().x,
+                this.getPosition().y,
+                this.radius);*/
+        this.renderer.circle(this.getBounds().x, this.getBounds().x, this.radius, 999);
+        this.renderer.end();
     }
 }
