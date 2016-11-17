@@ -3,11 +3,13 @@ package com.breakout.ca2016.Entities;
 /**
  * Created by womble on 16.11.2016.
  */
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.breakout.ca2016.Breakout;
+import com.breakout.ca2016.Controller.PaddleController;
 import com.breakout.ca2016.Screens.BrickRenderer;
 
 public class Board
@@ -42,6 +44,8 @@ public class Board
         this.batch = new SpriteBatch();
         this.font = new BitmapFont();
         ball = null;
+
+        Gdx.input.setInputProcessor(new PaddleController(this));
     }
 
     public void render(SpriteBatch batch, OrthographicCamera cam)

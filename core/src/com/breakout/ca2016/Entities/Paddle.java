@@ -55,7 +55,24 @@ public class Paddle
         this.renderer.end();
     }
 
+    public void moveLeft(float x) {
+        position.x += x;
+    }
+
+    public void moveRight(float x) {
+        position.x += x;
+    }
+
     public void update(float delta)
     {
+        // paddle can't move up (yet). set y to 0
+        this.board.paddle.getAcceleration().y = 0f;
+
+        // transform acceleration into "frame-time"
+        // Using Vector2 Method scale "scl".
+        this.board.paddle.getAcceleration().scl(delta);
+
+        // add the current paddle acceleration to the velocity
+        this.board.paddle.getVelocity().add(this.board.paddle.getAcceleration().x, this.board.paddle.getAcceleration().y);
     }
 }
