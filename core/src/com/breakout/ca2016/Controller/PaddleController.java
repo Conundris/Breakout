@@ -1,7 +1,9 @@
 package com.breakout.ca2016.Controller;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
+import com.breakout.ca2016.Breakout;
 import com.breakout.ca2016.Entities.Board;
 
 /**
@@ -10,9 +12,7 @@ import com.breakout.ca2016.Entities.Board;
 public class PaddleController implements InputProcessor {
 
     private Board board;
-    private static float DAMP = .915f;
-    private float MAX_VEL = 4f;
-    private float ACCELERATION = 40f;
+    private float ACCELERATION = 60f;
 
     public PaddleController(Board board){
         this.board = board;
@@ -20,7 +20,6 @@ public class PaddleController implements InputProcessor {
 
     @Override
     public boolean keyDown(int keycode) {
-
         // left key is pressed?
         if (keycode == Input.Keys.LEFT)
         {
@@ -38,6 +37,7 @@ public class PaddleController implements InputProcessor {
 
         if (keycode == Input.Keys.RIGHT)
         {
+
             if (this.board.paddle.getPosition().x < Board.BOARD_WIDTH - this.board.paddle.getBounds().width)
             {
                 this.board.paddle.getAcceleration().x += ACCELERATION;
@@ -48,12 +48,32 @@ public class PaddleController implements InputProcessor {
                 this.board.paddle.getPosition().x = Board.BOARD_WIDTH - this.board.paddle.getBounds().width;
             }
         }
+
+        if( keycode == Input.Keys.ESCAPE) {
+            Gdx.app.exit();
+        }
+
+        if( keycode == Input.Keys.F1) {
+            if(!Breakout.DEBUG) Breakout.DEBUG = true;
+            if(Breakout.DEBUG) Breakout.DEBUG = false;
+        }
+
         return true;
     }
 
     @Override
     public boolean keyUp(int keycode) {
-        return false;
+
+        if (keycode == Input.Keys.LEFT)
+        {
+            this.board.paddle.getVelocity().x = 0;
+        }
+
+        if (keycode == Input.Keys.RIGHT)
+        {
+            this.board.paddle.getVelocity().x = 0;
+        }
+        return true;
     }
 
     @Override

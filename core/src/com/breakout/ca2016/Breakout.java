@@ -5,6 +5,8 @@ import com.badlogic.gdx.Screen;
 
 public class Breakout extends Game {
 
+	public static boolean DEBUG = false;
+
 	private static MainGameScreen mainGameScreen;
 	private static MainMenuScreen mainMenuScreen;
 

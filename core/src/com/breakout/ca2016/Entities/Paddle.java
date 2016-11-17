@@ -4,12 +4,15 @@ package com.breakout.ca2016.Entities;
  * Created by t00191944 on 16/11/2016.
  */
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.Pool;
+import com.breakout.ca2016.Breakout;
 
 public class Paddle
 {
@@ -17,7 +20,6 @@ public class Paddle
 
     private final float WIDTH = 1.5f;
     private final float HEIGHT = .25f;
-    public final float SPEED = .01f;
 
     private final ShapeRenderer renderer;
 
@@ -43,6 +45,14 @@ public class Paddle
         this.renderer = new ShapeRenderer();
     }
 
+    private final Pool<Rectangle> rectPool = new Pool<Rectangle>() {
+        @Override
+        protected Rectangle newObject()
+        {
+            return new Rectangle();
+        }
+    };
+
     public void render(SpriteBatch batch, OrthographicCamera cam)
     {
         this.renderer.setProjectionMatrix(cam.combined);
@@ -65,6 +75,10 @@ public class Paddle
 
     public void update(float delta)
     {
+        if(Breakout.DEBUG) {
+            Gdx.app.debug("DEBUG", "X Position: " + this.board.paddle.getPosition().x);
+            Gdx.app.debug("DEBUG", "Y Position: " + this.board.paddle.getPosition().y);
+        }
         // paddle can't move up (yet). set y to 0
         this.board.paddle.getAcceleration().y = 0f;
 
@@ -74,5 +88,12 @@ public class Paddle
 
         // add the current paddle acceleration to the velocity
         this.board.paddle.getVelocity().add(this.board.paddle.getAcceleration().x, this.board.paddle.getAcceleration().y);
+
+        // Scale Velocity to Frametime (Deltatime)
+        this.board.paddle.getVelocity().scl(delta);
+        // add the paddle velocity (which may be ZERO (0) at this point), so that the paddle moves in the screen.
+        this.board.paddle.getPosition().add(this.board.paddle.getVelocity());
+        // Scale velocity back to base units
+        this.board.paddle.getVelocity().scl(1 / delta);
     }
 }
