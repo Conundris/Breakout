@@ -11,6 +11,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.breakout.ca2016.Breakout;
 import com.breakout.ca2016.Controller.PaddleController;
 import com.breakout.ca2016.Screens.BrickRenderer;
+import com.breakout.ca2016.Screens.WallRenderer;
 
 public class Board
 {
@@ -22,6 +23,7 @@ public class Board
     public Paddle paddle;
     public Ball ball;
     public BrickRenderer bricks;
+    public WallRenderer walls;
 
     // other
     public int destroyedBricks = 0;
@@ -40,6 +42,7 @@ public class Board
         this.paddle = new Paddle(this);
         this.ball = new Ball(this);
         this.bricks = new BrickRenderer(this, 20);
+        this.walls = new WallRenderer(this);
 
         // local properties
         this.batch = new SpriteBatch();
@@ -53,6 +56,7 @@ public class Board
         this.paddle.render(batch, cam);
         this.ball.render(batch, cam);
         this.bricks.render(batch, cam);
+        this.walls.render(batch, cam);
 
         this.batch.begin();
         this.renderPlayerScore();
@@ -62,6 +66,7 @@ public class Board
     public void update(float delta)
     {
         this.paddle.update(delta);
+        this.ball.update(delta);
         //this.ball.upd
     }
 

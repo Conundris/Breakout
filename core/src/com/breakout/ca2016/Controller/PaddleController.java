@@ -12,7 +12,7 @@ import com.breakout.ca2016.Entities.Board;
 public class PaddleController implements InputProcessor {
 
     private Board board;
-    private float ACCELERATION = 60f;
+    private float ACCELERATION = 120f;
 
     public PaddleController(Board board){
         this.board = board;
@@ -56,6 +56,14 @@ public class PaddleController implements InputProcessor {
         if( keycode == Input.Keys.F1) {
             if(!Breakout.DEBUG) Breakout.DEBUG = true;
             if(Breakout.DEBUG) Breakout.DEBUG = false;
+        }
+
+        if (keycode == Input.Keys.SPACE) {
+            if (!this.board.ball.isActive())
+            {
+                this.board.ball.setActive(true);
+                this.board.ball.getVelocity().y = 0f;
+            }
         }
 
         return true;
