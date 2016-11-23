@@ -1,10 +1,12 @@
-package com.breakout.ca2016;
+package com.breakout.ca2016.Screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.breakout.ca2016.Breakout;
+import com.breakout.ca2016.Controller.MainGameController;
 import com.breakout.ca2016.Entities.Board;
 
 /**
@@ -32,7 +34,7 @@ public class MainGameScreen implements Screen {
 
     @Override
     public void show() {
-
+        Gdx.input.setInputProcessor(new MainGameController(board));
     }
 
     @Override

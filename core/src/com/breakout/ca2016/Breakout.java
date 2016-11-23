@@ -2,6 +2,8 @@ package com.breakout.ca2016;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Screen;
+import com.breakout.ca2016.Screens.MainGameScreen;
+import com.breakout.ca2016.Screens.MainMenuScreen;
 
 public class Breakout extends Game {
 
@@ -23,7 +25,7 @@ public class Breakout extends Game {
 
 	@Override
 	public void create () {
-		// Creating Screens
+		// Creating Creators
 		mainGameScreen = new MainGameScreen(this);
 		mainMenuScreen = new MainMenuScreen(this);
 		setScreen(mainMenuScreen);

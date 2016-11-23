@@ -1,4 +1,4 @@
-package com.breakout.ca2016.Screens;
+package com.breakout.ca2016.Creators;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -10,7 +10,7 @@ import com.breakout.ca2016.Entities.Brick;
 /**
  * Created by womble on 17.11.2016.
  */
-public class BrickRenderer {
+public class BrickCreator {
     private final Board board;
 
     private final Brick[] bricks;
@@ -18,14 +18,14 @@ public class BrickRenderer {
 
     protected final ShapeRenderer renderer;
 
-    public BrickRenderer(Board board, int amountBlocks)
+    public BrickCreator(Board board, int amountBlocks)
     {
         this.board = board;
         this.bricks = generateBlocks(amountBlocks);
         this.renderer = new ShapeRenderer();
     }
 
-    public BrickRenderer(Board board, Brick[] bricks)
+    public BrickCreator(Board board, Brick[] bricks)
     {
         this.board = board;
         this.bricks = bricks;

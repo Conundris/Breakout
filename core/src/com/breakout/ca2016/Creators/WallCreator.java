@@ -1,4 +1,4 @@
-package com.breakout.ca2016.Screens;
+package com.breakout.ca2016.Creators;
 
 /**
  * Created by womble on 21.11.2016.
@@ -10,14 +10,14 @@ import com.badlogic.gdx.math.Vector2;
 import com.breakout.ca2016.Entities.Board;
 import com.breakout.ca2016.Entities.Wall;
 
-public class WallRenderer extends BrickRenderer
+public class WallCreator extends BrickCreator
 {
 
     private final Wall[] blocks;
     @Override
     public Wall[] getBlocks() {return this.blocks; }
 
-    public WallRenderer(Board board)
+    public WallCreator(Board board)
     {
         super(board, 0);
         this.blocks = this.generateWalls();
