@@ -4,8 +4,6 @@ package com.breakout.ca2016.Entities;
  * Created by t00191944 on 16/11/2016.
  */
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -52,7 +50,6 @@ public class Ball {
     private int direction_x = 1;
 
     private final ShapeRenderer renderer;
-    //private final Sound sound = Gdx.audio.newSound(Gdx.files.internal("sounds/soccer.bounce.mp3"));
 
     private final SpriteBatch batch;
     private final BitmapFont font;
@@ -111,11 +108,11 @@ public class Ball {
             if (this.position.y < 0 || this.position.y > Board.BOARD_HEIGHT)
             {
                 // remove a ball from the player
-                this.board.balls -= 1;
-                if (this.board.balls < 0)
+                this.board.ballLives -= 1;
+                if (this.board.ballLives < 0)
                 {
-                    // set the end screen
-                    //this.board.game.endBreakoutGame();
+                    //set the end screen
+                    this.board.endGame();
                 }
                 else
                 {
@@ -124,7 +121,7 @@ public class Ball {
 
             }
         }
-        else // it's not active, it should "attached" to the paddle
+        else // it's not active, it should be "attached" to the paddle
         {
             this.position.x = this.board.paddle.getBallPosition().x;
             this.position.y = this.board.paddle.getBallPosition().y;
@@ -227,7 +224,7 @@ public class Ball {
             if (this.board.destroyedBricks == this.board.bricks.getBlocks().length)
             {
                 this.reset();
-                //this.board.game.endBreakoutGame();
+                this.board.endGame();
             }
         }
 

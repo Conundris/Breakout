@@ -1,9 +1,18 @@
 package com.breakout.ca2016;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Pixmap;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.breakout.ca2016.Screens.LeaderBoardScreen;
 import com.breakout.ca2016.Screens.MainGameScreen;
 import com.breakout.ca2016.Screens.MainMenuScreen;
+import com.breakout.ca2016.Screens.PostGameScreen;
 
 public class Breakout extends Game {
 
@@ -11,6 +20,8 @@ public class Breakout extends Game {
 
 	private static MainGameScreen mainGameScreen;
 	private static MainMenuScreen mainMenuScreen;
+	private static LeaderBoardScreen leaderBoardScreen;
+	private static PostGameScreen postGameScreen;
 
 	public Screen getScreenType(ScreenType screenType){
 		switch(screenType){
@@ -18,6 +29,10 @@ public class Breakout extends Game {
 				return mainMenuScreen;
 			case MainGame:
 				return mainGameScreen;
+			case LeaderBoard:
+				return leaderBoardScreen;
+			case PostGame:
+				return postGameScreen;
 			default:
 				return mainGameScreen;
 		}
@@ -28,6 +43,9 @@ public class Breakout extends Game {
 		// Creating Creators
 		mainGameScreen = new MainGameScreen(this);
 		mainMenuScreen = new MainMenuScreen(this);
+		leaderBoardScreen = new LeaderBoardScreen(this);
+		postGameScreen = new PostGameScreen(this);
+
 		setScreen(mainMenuScreen);
 	}
 
@@ -41,4 +59,5 @@ public class Breakout extends Game {
 		mainGameScreen.dispose();
 		mainMenuScreen.dispose();
 	}
+
 }

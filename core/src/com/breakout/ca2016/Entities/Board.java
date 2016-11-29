@@ -1,8 +1,5 @@
 package com.breakout.ca2016.Entities;
 
-/**
- * Created by womble on 16.11.2016.
- */
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -10,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.breakout.ca2016.Breakout;
 import com.breakout.ca2016.Creators.BrickCreator;
 import com.breakout.ca2016.Creators.WallCreator;
+import com.breakout.ca2016.ScreenType;
 
 public class Board
 {
@@ -31,7 +29,7 @@ public class Board
     private BitmapFont font;
 
     // Player Board properties
-    public int balls = 3;
+    public int ballLives = 3;
     public int player_score = 0;
 
     public Board(Breakout game)
@@ -63,12 +61,15 @@ public class Board
     {
         this.paddle.update(delta);
         this.ball.update(delta);
-        //this.ball.upd
     }
 
     private void renderPlayerScore()
     {
         this.font.setColor(Color.GRAY);
         this.font.draw(this.batch, "Score: " + this.player_score, 350f, 20f);
+    }
+
+    public void endGame() {
+        this.game.setScreen(this.game.getScreenType(ScreenType.PostGame));
     }
 }

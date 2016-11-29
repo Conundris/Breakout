@@ -59,17 +59,27 @@ public class MainMenuScreen implements Screen
 
         //Listeners
         startGame.addListener(new ClickListener() {
-                                  @Override
-                                  public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                                      return true;
-                                  }
+              @Override
+              public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                  return true;
+              }
 
-                                  @Override
-                                  public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
-                                      game.setScreen(game.getScreenType(ScreenType.MainGame));
-                                  }
-                              }
-        );
+              @Override
+              public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+                  game.setScreen(game.getScreenType(ScreenType.MainGame));
+              }
+        });
+        leaderboardButton.addListener(new ClickListener() {
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                return true;
+            }
+
+            @Override
+            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+                game.setScreen(game.getScreenType(ScreenType.LeaderBoard));
+            }
+        });
         quitButton.addListener(new ClickListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {

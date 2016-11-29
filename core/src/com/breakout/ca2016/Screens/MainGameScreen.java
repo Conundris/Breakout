@@ -22,19 +22,20 @@ public class MainGameScreen implements Screen {
 
     public MainGameScreen(Breakout game) {
         this.game = game;
-        init();
     }
 
     private void init() {
         this.board = new Board(game);
         this.batch = new SpriteBatch();
+        // Create Camera
         this.cam = new OrthographicCamera(Board.BOARD_WIDTH, Board.BOARD_HEIGHT);
         this.cam.setToOrtho(false, Board.BOARD_WIDTH, Board.BOARD_HEIGHT);
+        Gdx.input.setInputProcessor(new MainGameController(board));
     }
 
     @Override
     public void show() {
-        Gdx.input.setInputProcessor(new MainGameController(board));
+        init();
     }
 
     @Override
@@ -44,18 +45,12 @@ public class MainGameScreen implements Screen {
         Gdx.gl.glClearColor(0.1f, 0.1f, 0.1f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        // start the updating...
-        updateGame(delta);
+        // start the updating of all Objects
+        this.board.update(delta);
         this.board.render(this.batch, this.cam);
         cam.update();
 
     }
-
-    public void updateGame(float delta)
-    {
-        this.board.update(delta);
-    }
-
 
     @Override
     public void resize(int width, int height) {
@@ -64,21 +59,24 @@ public class MainGameScreen implements Screen {
 
     @Override
     public void pause() {
-
+        Gdx.app.log("Test", "Pause");
     }
 
     @Override
     public void resume() {
-
+        Gdx.app.log("Test", "Resume");
     }
 
     @Override
     public void hide() {
-
+        Gdx.app.log("Test", "Hide Called");
     }
 
     @Override
     public void dispose() {
-
+        Gdx.app.log("Test", "Dispose Called");
+        this.board = null;
+        this.batch = null;
+        this.cam = null;
     }
 }

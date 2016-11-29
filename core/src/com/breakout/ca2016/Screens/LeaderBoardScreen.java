@@ -12,6 +12,10 @@ public class LeaderBoardScreen implements Screen {
     private Breakout game;
     private Stage stage;
 
+    public LeaderBoardScreen(Breakout game){
+        this.game = game;
+    }
+
     @Override
     public void show() {
 
