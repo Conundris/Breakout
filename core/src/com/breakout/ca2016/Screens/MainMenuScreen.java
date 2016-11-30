@@ -23,20 +23,19 @@ public class MainMenuScreen implements Screen
     private BitmapFont font;
     private Skin skin;
     private Stage stage;
+    private Table table;
 
     public MainMenuScreen(Breakout game)
     {
         this.game = game;
         this.font = new BitmapFont();
 
-        Table table = new Table();
+        table = new Table();
         table.setFillParent(true);
 
         stage = new Stage();
 
         CreateSkin();
-
-        GenerateUI(stage, table);
     }
 
     private void GenerateUI(Stage stage, Table table) {
@@ -114,13 +113,15 @@ public class MainMenuScreen implements Screen
     public void show()
     {
         Gdx.input.setInputProcessor(stage);
+
+        GenerateUI(stage, table);
     }
 
     @Override
     public void hide()
     {
         // TODO Auto-generated method stub
-
+        dispose();
     }
 
     @Override
@@ -141,7 +142,8 @@ public class MainMenuScreen implements Screen
     public void dispose()
     {
         // TODO Auto-generated method stub
-
+        table.clear();
+        stage.clear();
     }
 
     private void CreateSkin(){

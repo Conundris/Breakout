@@ -50,7 +50,6 @@ public class MainGameController implements InputProcessor {
 
         if( keycode == Input.Keys.ESCAPE) {
             //TODO: make popup for confirmation if you want to go back to MainMenu
-            board.resetGame();
             board.game.setScreen(board.game.getScreenType(ScreenType.MainMenu));
         }
 

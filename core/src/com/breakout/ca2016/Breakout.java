@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.breakout.ca2016.Entities.Player;
 import com.breakout.ca2016.Screens.LeaderBoardScreen;
 import com.breakout.ca2016.Screens.MainGameScreen;
 import com.breakout.ca2016.Screens.MainMenuScreen;
@@ -17,6 +18,7 @@ import com.breakout.ca2016.Screens.PostGameScreen;
 public class Breakout extends Game {
 
 	public static boolean DEBUG = false;
+	public Player player;
 
 	private static MainGameScreen mainGameScreen;
 	private static MainMenuScreen mainMenuScreen;
@@ -40,7 +42,7 @@ public class Breakout extends Game {
 
 	@Override
 	public void create () {
-		// Creating Creators
+		// Creating SCrens
 		mainGameScreen = new MainGameScreen(this);
 		mainMenuScreen = new MainMenuScreen(this);
 		leaderBoardScreen = new LeaderBoardScreen(this);
@@ -58,6 +60,11 @@ public class Breakout extends Game {
 	public void dispose () {
 		mainGameScreen.dispose();
 		mainMenuScreen.dispose();
+	}
+
+	public void endGame(int playerScore) {
+		player.setScore(playerScore);
+		setScreen(this.getScreenType(ScreenType.PostGame));
 	}
 
 }

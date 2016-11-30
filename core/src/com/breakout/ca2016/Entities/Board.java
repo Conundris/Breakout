@@ -23,6 +23,7 @@ public class Board
 
     // other
     public int destroyedBricks = 0;
+    public boolean blnFinished = false;
 
     //local properties
     private SpriteBatch batch;
@@ -67,9 +68,5 @@ public class Board
     {
         this.font.setColor(Color.GRAY);
         this.font.draw(this.batch, "Score: " + this.player_score, 350f, 20f);
-    }
-
-    public void endGame() {
-        this.game.setScreen(this.game.getScreenType(ScreenType.PostGame));
     }
 }

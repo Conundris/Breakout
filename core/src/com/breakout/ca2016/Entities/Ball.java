@@ -112,13 +112,12 @@ public class Ball {
                 if (this.board.ballLives < 0)
                 {
                     //set the end screen
-                    this.board.endGame();
+                    this.board.blnFinished = true;
                 }
                 else
                 {
-                    this.reset();
+                    this.board.blnFinished = true;
                 }
-
             }
         }
         else // it's not active, it should be "attached" to the paddle
@@ -223,8 +222,7 @@ public class Ball {
 
             if (this.board.destroyedBricks == this.board.bricks.getBlocks().length)
             {
-                this.reset();
-                this.board.endGame();
+                this.board.blnFinished = true;
             }
         }
 

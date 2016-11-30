@@ -6,11 +6,13 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.breakout.ca2016.Breakout;
+import com.breakout.ca2016.Entities.LeaderBoard;
+import com.breakout.ca2016.ScreenType;
 
 /**
  * Created by t00191944 on 29/11/2016.
@@ -21,12 +23,13 @@ public class PostGameScreen implements Screen {
     private Skin skin;
     private BitmapFont font;
     private Stage stage;
+    private Table table;
 
     public PostGameScreen(Breakout game) {
         this.game = game;
         this.font = new BitmapFont();
 
-        Table table = new Table();
+        table = new Table();
         table.setFillParent(true);
 
         stage = new Stage();
@@ -34,9 +37,43 @@ public class PostGameScreen implements Screen {
         CreateSkin();
     }
 
+    private void GenerateUI(Stage stage, Table table) {
+
+        Label lblPlayerName = new Label("Playername: ", skin);
+        final TextField txtPlayerName = new TextField("", skin);
+
+        final TextButton btnContinueButton = new TextButton("Continue", skin);
+
+
+        table.add(lblPlayerName);
+        table.add(txtPlayerName).width(100);
+
+        table.add(btnContinueButton).spaceTop(20);
+
+        stage.addActor(table);
+
+        btnContinueButton.addListener(new ClickListener() {
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                return true;
+            }
+
+            @Override
+            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+                if(txtPlayerName.getText() != "") {
+                    game.player.setUserName(txtPlayerName.getText());
+                    LeaderBoard.getInstance().addPlayer(game.player);
+                    game.player = null;
+                    game.setScreen(game.getScreenType(ScreenType.MainMenu));
+                }
+            }
+        });
+    }
+
     @Override
     public void show() {
-
+        GenerateUI(stage, table);
+        Gdx.input.setInputProcessor(stage);
     }
 
     @Override
@@ -87,5 +124,15 @@ public class PostGameScreen implements Screen {
         textButtonStyle.over = skin.newDrawable("background", Color.LIGHT_GRAY);
         textButtonStyle.font = skin.getFont("default");
         skin.add("default", textButtonStyle);
+
+        Label.LabelStyle labelStyle = new Label.LabelStyle();
+        labelStyle.background = skin.newDrawable("background", Color.DARK_GRAY);
+        labelStyle.font = skin.getFont("default");
+        skin.add("default", labelStyle);
+
+        TextField.TextFieldStyle textFieldStyle = new TextField.TextFieldStyle();
+        textFieldStyle.font = skin.getFont("default");
+        textFieldStyle.background = skin.newDrawable("background", Color.GRAY);
+        skin.add("default", textFieldStyle);
     }
 }
