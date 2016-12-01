@@ -41,7 +41,6 @@ public class MainMenuScreen implements Screen
     private void GenerateUI(Stage stage, Table table) {
 
         // Create UI elements
-        Image title = new Image();
         TextButton startGame = new TextButton("New Game", skin);
         TextButton leaderboardButton = new TextButton("Leaderboards", skin);
         TextButton quitButton = new TextButton("Quit", skin);

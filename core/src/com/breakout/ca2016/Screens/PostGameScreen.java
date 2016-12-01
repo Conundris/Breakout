@@ -3,6 +3,7 @@ package com.breakout.ca2016.Screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -40,15 +41,15 @@ public class PostGameScreen implements Screen {
     private void GenerateUI(Stage stage, Table table) {
 
         Label lblPlayerName = new Label("Playername: ", skin);
-        final TextField txtPlayerName = new TextField("", skin);
+        TextField txtPlayerName = new TextField("", skin);
 
-        final TextButton btnContinueButton = new TextButton("Continue", skin);
+        TextButton btnContinueButton = new TextButton("Continue", skin);
 
 
         table.add(lblPlayerName);
-        table.add(txtPlayerName).width(100);
+        table.add(txtPlayerName).width(100).height(30).row();
 
-        table.add(btnContinueButton).spaceTop(20);
+        table.add(btnContinueButton).spaceTop(30).padLeft(50).row();
 
         stage.addActor(table);
 
@@ -64,6 +65,7 @@ public class PostGameScreen implements Screen {
                     game.player.setUserName(txtPlayerName.getText());
                     LeaderBoard.getInstance().addPlayer(game.player);
                     game.player = null;
+
                     game.setScreen(game.getScreenType(ScreenType.MainMenu));
                 }
             }
@@ -78,7 +80,11 @@ public class PostGameScreen implements Screen {
 
     @Override
     public void render(float delta) {
+        Gdx.gl.glClearColor(0.1f, 0.1f, 0.1f, 1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
+        stage.act(delta);
+        stage.draw();
     }
 
     @Override
@@ -103,7 +109,8 @@ public class PostGameScreen implements Screen {
 
     @Override
     public void dispose() {
-
+        table.clear();
+        stage.clear();
     }
 
     public void CreateSkin(){
@@ -132,6 +139,7 @@ public class PostGameScreen implements Screen {
 
         TextField.TextFieldStyle textFieldStyle = new TextField.TextFieldStyle();
         textFieldStyle.font = skin.getFont("default");
+        textFieldStyle.fontColor = Color.WHITE;
         textFieldStyle.background = skin.newDrawable("background", Color.GRAY);
         skin.add("default", textFieldStyle);
     }
