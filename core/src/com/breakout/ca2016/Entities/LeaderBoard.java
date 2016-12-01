@@ -42,7 +42,7 @@ public class LeaderBoard {
         }
     }
 
-    public void saveLeaderBoard() {
+    private void saveLeaderBoard() {
         String jsonString = json.prettyPrint(players);
 
         leaderBoardFile.writeString(jsonString, false);
@@ -52,11 +52,12 @@ public class LeaderBoard {
 
     public void addPlayer(Player player) {
         players.add(player);
+        saveLeaderBoard();
     }
 
     public ArrayList<Player> getLeaderBoard() {
         // Sort List of Players ascending on Score
-        players.sort((Player v1, Player v2) -> v1.getScore()-v2.getScore());
+        players.sort((Player v1, Player v2) -> v2.getScore()-v1.getScore());
         return players;
     }
 }

@@ -4,4 +4,9 @@
 	userName: exceeds
 	score: 550
 }
+{
+	class: com.breakout.ca2016.Entities.Player
+	userName: exceeds
+	score: 2500
+}
 ]
