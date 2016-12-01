@@ -104,7 +104,7 @@ public class PostGameScreen implements Screen {
 
     @Override
     public void hide() {
-
+        dispose();
     }
 
     @Override
@@ -133,7 +133,6 @@ public class PostGameScreen implements Screen {
         skin.add("default", textButtonStyle);
 
         Label.LabelStyle labelStyle = new Label.LabelStyle();
-        labelStyle.background = skin.newDrawable("background", Color.DARK_GRAY);
         labelStyle.font = skin.getFont("default");
         skin.add("default", labelStyle);
 

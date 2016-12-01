@@ -50,7 +50,7 @@ public class LeaderBoardScreen implements Screen {
     private void GenerateUI(Stage stage, Table table) {
 
         Label lblTitle = new Label("Leaderboard", skin);
-        table.add(lblTitle).row();
+        table.add(lblTitle).spaceBottom(25).row();
 
         ArrayList<Player> players = LeaderBoard.getInstance().getLeaderBoard();
 
@@ -107,7 +107,7 @@ public class LeaderBoardScreen implements Screen {
 
     @Override
     public void hide() {
-
+        dispose();
     }
 
     @Override
@@ -136,7 +136,6 @@ public class LeaderBoardScreen implements Screen {
         skin.add("default", textButtonStyle);
 
         Label.LabelStyle labelStyle = new Label.LabelStyle();
-        labelStyle.background = skin.newDrawable("background", Color.DARK_GRAY);
         labelStyle.font = skin.getFont("default");
         skin.add("default", labelStyle);
 

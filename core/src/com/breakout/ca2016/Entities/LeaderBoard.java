@@ -3,8 +3,6 @@ package com.breakout.ca2016.Entities;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.Json;
-import com.badlogic.gdx.utils.JsonReader;
-import com.badlogic.gdx.utils.JsonValue;
 
 import java.util.ArrayList;
 
@@ -56,7 +54,7 @@ public class LeaderBoard {
     }
 
     public ArrayList<Player> getLeaderBoard() {
-        // Sort List of Players ascending on Score
+        // Sort List of Players descending on Score
         players.sort((Player v1, Player v2) -> v2.getScore()-v1.getScore());
         return players;
     }
