@@ -29,6 +29,7 @@ public class Board
     private SpriteBatch batch;
     private BitmapFont font;
 
+
     // Player Board properties
     public int ballLives = 3;
     public int player_score = 0;
@@ -38,7 +39,7 @@ public class Board
         this.game = game;
         this.paddle = new Paddle(this);
         this.ball = new Ball(this);
-        this.bricks = new BrickCreator(this, 20);
+        this.bricks = new BrickCreator(this, 28);
         this.walls = new WallCreator(this);
 
         // local properties

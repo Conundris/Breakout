@@ -1,6 +1,5 @@
 package com.breakout.ca2016.Controller;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.breakout.ca2016.Breakout;
@@ -13,7 +12,7 @@ import com.breakout.ca2016.ScreenType;
 public class MainGameController implements InputProcessor {
 
     private Board board;
-    private float ACCELERATION = 120f;
+    private float ACCELERATION = 160f;
 
     public MainGameController(Board board){
         this.board = board;
@@ -24,6 +23,7 @@ public class MainGameController implements InputProcessor {
 
         if (keycode == Input.Keys.LEFT)
         {
+            // Check position of Paddle, so that it doesn't go out of screen
             if (this.board.paddle.getPosition().x > 0)
             {
                 this.board.paddle.getAcceleration().x -= ACCELERATION;

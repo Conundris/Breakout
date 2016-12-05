@@ -26,9 +26,9 @@ public class Ball {
     public Boolean isActive() { return states.get(States.ACTIVE);}
     public void setActive(Boolean b) {states.put(States.ACTIVE, b);}
 
-    public static final float SIZE = .25f;
+    public static final float SIZE = .15f;
     private static final float SPEED = 2f;
-    private float max_vel = 5f;
+    private float max_vel = 3f;
     private final float ACCELERATION = 40f;
 
     private final Vector2 velocity = new Vector2();
