@@ -38,6 +38,7 @@ public class MainMenuScreen implements Screen
         CreateSkin();
     }
 
+    // Create Formitems and add them to the stage
     private void GenerateUI(Stage stage, Table table) {
 
         // Create UI elements
@@ -51,11 +52,9 @@ public class MainMenuScreen implements Screen
         table.add(quitButton).spaceBottom(10).row();
 
         // Add UI elements directly to Stage
-
-
         stage.addActor(table);
 
-        //Listeners
+        //Add Listeners
         startGame.addListener(new ClickListener() {
               @Override
               public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -104,13 +103,12 @@ public class MainMenuScreen implements Screen
     @Override
     public void resize(int width, int height)
     {
-        // TODO Auto-generated method stub
-
     }
 
     @Override
     public void show()
     {
+        // Point to the stage for processing Input.
         Gdx.input.setInputProcessor(stage);
 
         GenerateUI(stage, table);
@@ -119,28 +117,23 @@ public class MainMenuScreen implements Screen
     @Override
     public void hide()
     {
-        // TODO Auto-generated method stub
         dispose();
     }
 
     @Override
     public void pause()
     {
-        // TODO Auto-generated method stub
-
     }
 
     @Override
     public void resume()
     {
-        // TODO Auto-generated method stub
-
     }
 
     @Override
     public void dispose()
     {
-        // TODO Auto-generated method stub
+        // Clear Table and Stage when not needed anymore
         table.clear();
         stage.clear();
     }

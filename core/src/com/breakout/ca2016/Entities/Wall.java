@@ -9,7 +9,6 @@ import com.badlogic.gdx.math.Vector2;
 public class Wall extends Brick
 {
     private String name;
-    public void setName(String name) { this.name = name;}
     public String getName() { return this.name; }
 
     public Wall(Vector2 position, float height, float width, String name)
@@ -20,5 +19,4 @@ public class Wall extends Brick
         this.name = name;
         this.color = Color.ORANGE;
     }
-
 }

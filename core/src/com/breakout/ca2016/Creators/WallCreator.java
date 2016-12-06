@@ -7,28 +7,34 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.Array;
 import com.breakout.ca2016.Entities.Board;
 import com.breakout.ca2016.Entities.Wall;
+
+import java.util.ArrayList;
 
 public class WallCreator extends BrickCreator
 {
 
-    private final Wall[] blocks;
-    @Override
-    public Wall[] getBlocks() {return this.blocks; }
+    private final ArrayList<Wall> blocks;
+
+    public ArrayList<Wall> getWalls() {return this.blocks; }
 
     public WallCreator(Board board)
     {
-        super(board, 0);
+        super(0);
         this.blocks = this.generateWalls();
-        // TODO Auto-generated constructor stub
     }
 
     @Override
     public void render(SpriteBatch batch, OrthographicCamera cam)
     {
+        //telling the renderer (Shaperenderer) to use the the projection and view matrices of the camera.
+        // http://www.opengl-tutorial.org/beginners-tutorials/tutorial-3-matrices/#The_Model__View_and_Projection_matrices
         this.renderer.setProjectionMatrix(cam.combined);
+        // Set ShapeType to Filled Forms.
         this.renderer.begin(ShapeType.Filled);
+        // Render Walls
         for (Wall wall : this.blocks)
         {
             this.renderer.setColor(wall.getColor());
@@ -40,12 +46,12 @@ public class WallCreator extends BrickCreator
         this.renderer.end();
     }
 
-    private Wall[] generateWalls()
+    private ArrayList<Wall> generateWalls()
     {
-        Wall[] walls = new Wall[3];
-        walls[0] = new Wall(new Vector2(0,0), Board.BOARD_HEIGHT, .25f, "left"); //left wall
-        walls[1] = new Wall(new Vector2(0, Board.BOARD_HEIGHT - .25f), .25f, Board.BOARD_WIDTH, "top"); //top wall
-        walls[2] = new Wall(new Vector2(Board.BOARD_WIDTH - .25f,0), Board.BOARD_HEIGHT, .25f, "right"); //right wall
+        ArrayList<Wall> walls = new ArrayList<>();
+        walls.add(new Wall(new Vector2(0,0), Board.BOARD_HEIGHT, .10f, "left"));
+        walls.add(new Wall(new Vector2(0, Board.BOARD_HEIGHT - .10f), .25f, Board.BOARD_WIDTH, "top"));
+        walls.add(new Wall(new Vector2(Board.BOARD_WIDTH - .10f,0), Board.BOARD_HEIGHT, .25f, "right"));
         return walls;
     }
 }

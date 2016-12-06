@@ -50,6 +50,7 @@ public class MainGameScreen implements Screen {
         Gdx.gl.glClearColor(0.1f, 0.1f, 0.1f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
+        // Check if Game is finished
         if(!board.blnFinished) {
             // start the updating of all Objects
             this.board.update(delta);
@@ -62,17 +63,16 @@ public class MainGameScreen implements Screen {
 
     @Override
     public void resize(int width, int height) {
-
     }
 
     @Override
     public void pause() {
-        Gdx.app.log("Test", "Pause");
+        Gdx.app.log("State", "Pause");
     }
 
     @Override
     public void resume() {
-        Gdx.app.log("Test", "Resume");
+        Gdx.app.log("State", "Resume");
     }
 
     @Override

@@ -6,11 +6,11 @@ import com.badlogic.gdx.utils.Json;
 
 import java.util.ArrayList;
 
-/**
- * Created by t00191944 on 30/11/2016.
- */
 public class LeaderBoard {
+
     private Json json;
+    // Handles the local File for Leaderboard, description of Local:
+    // https://github.com/libgdx/libgdx/wiki/File-handling
     private FileHandle leaderBoardFile = Gdx.files.local("leaderboard.json");
 
     public ArrayList<Player> players;
@@ -27,6 +27,7 @@ public class LeaderBoard {
     }
 
     public void loadLeaderBoard() {
+        // Check if File exists locally
         if(leaderBoardFile.exists()) {
             ArrayList<Player> jsonValueList = json.fromJson(ArrayList.class, leaderBoardFile);
 

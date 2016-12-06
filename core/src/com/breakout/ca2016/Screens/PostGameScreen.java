@@ -38,21 +38,23 @@ public class PostGameScreen implements Screen {
         CreateSkin();
     }
 
+    // Create Formitems and add them to the stage
     private void GenerateUI(Stage stage, Table table) {
 
+        // Create UI elements
         Label lblPlayerName = new Label("Playername: ", skin);
         TextField txtPlayerName = new TextField("", skin);
-
         TextButton btnContinueButton = new TextButton("Continue", skin);
 
-
+        // Add UI elements to table
         table.add(lblPlayerName);
         table.add(txtPlayerName).width(100).height(30).row();
-
         table.add(btnContinueButton).spaceTop(30).padLeft(50).row();
 
+        // Add UI elements directly to Stage
         stage.addActor(table);
 
+        //Add Listener to Continue button
         btnContinueButton.addListener(new ClickListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -61,9 +63,13 @@ public class PostGameScreen implements Screen {
 
             @Override
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
-                if(txtPlayerName.getText() != "") {
+                if(txtPlayerName.getText() != "" && !txtPlayerName.getText().trim().isEmpty()) {
                     game.player.setUserName(txtPlayerName.getText());
                     LeaderBoard.getInstance().addPlayer(game.player);
+                    game.player = null;
+
+                    game.setScreen(game.getScreenType(ScreenType.MainMenu));
+                } else {
                     game.player = null;
 
                     game.setScreen(game.getScreenType(ScreenType.MainMenu));
@@ -83,6 +89,7 @@ public class PostGameScreen implements Screen {
         Gdx.gl.glClearColor(0.1f, 0.1f, 0.1f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
+        //Render content in stage on to the screen.
         stage.act(delta);
         stage.draw();
     }

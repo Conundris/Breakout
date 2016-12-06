@@ -7,7 +7,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.breakout.ca2016.Breakout;
 import com.breakout.ca2016.Creators.BrickCreator;
 import com.breakout.ca2016.Creators.WallCreator;
-import com.breakout.ca2016.ScreenType;
 
 public class Board
 {
@@ -21,7 +20,7 @@ public class Board
     public BrickCreator bricks;
     public WallCreator walls;
 
-    // other
+    // Game Information
     public int destroyedBricks = 0;
     public boolean blnFinished = false;
 
@@ -39,7 +38,7 @@ public class Board
         this.game = game;
         this.paddle = new Paddle(this);
         this.ball = new Ball(this);
-        this.bricks = new BrickCreator(this, 28);
+        this.bricks = new BrickCreator(28);
         this.walls = new WallCreator(this);
 
         // local properties

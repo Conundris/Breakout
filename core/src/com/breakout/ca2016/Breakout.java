@@ -23,7 +23,6 @@ public class Breakout extends Game {
 
 	public static boolean DEBUG = false;
 
-	public LeaderBoard leaderBoard;
 	public Player player;
 
 	private static MainGameScreen mainGameScreen;
@@ -48,13 +47,11 @@ public class Breakout extends Game {
 
 	@Override
 	public void create () {
-
-		Gdx.app.debug("Test", Gdx.files.getLocalStoragePath());
-
+		// Initalise & load Leaderboard
 		LeaderBoard leaderBoard = LeaderBoard.getInstance();
 		leaderBoard.loadLeaderBoard();
 
-		// Creating Screns
+		// Creating Screens
 		mainGameScreen = new MainGameScreen(this);
 		mainMenuScreen = new MainMenuScreen(this);
 		leaderBoardScreen = new LeaderBoardScreen(this);
@@ -72,6 +69,8 @@ public class Breakout extends Game {
 	public void dispose () {
 		mainGameScreen.dispose();
 		mainMenuScreen.dispose();
+		leaderBoardScreen.dispose();
+		postGameScreen.dispose();
 	}
 
 	public void endGame(int playerScore) {

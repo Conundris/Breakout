@@ -49,11 +49,17 @@ public class LeaderBoardScreen implements Screen {
 
     private void GenerateUI(Stage stage, Table table) {
 
+        // Create UI elements
         Label lblTitle = new Label("Leaderboard", skin);
+        TextButton btnContinueButton = new TextButton("Continue", skin);
+
+        // Add UI elements to table
         table.add(lblTitle).spaceBottom(25).row();
 
+        //Get List of Playerss
         ArrayList<Player> players = LeaderBoard.getInstance().getLeaderBoard();
 
+        // Create UI elements and add them to the table for correct displaying
         for (Player player: players) {
 
             Label name = new Label(player.getUserName(), skin);
@@ -63,9 +69,10 @@ public class LeaderBoardScreen implements Screen {
             table.add(score).spaceBottom(10).row();
         }
 
-        TextButton btnContinueButton = new TextButton("Continue", skin);
+        // Add Continue Button at them
         table.add(btnContinueButton).spaceTop(30);
 
+        // Add UI elements directly to Stage
         stage.addActor(table);
 
         btnContinueButton.addListener(new ClickListener() {

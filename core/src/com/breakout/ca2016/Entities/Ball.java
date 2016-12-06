@@ -12,17 +12,18 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Pool;
+import com.breakout.ca2016.Breakout;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class Ball {
-
     private final Board board;
 
     public enum States { ACTIVE }
-    public static Map<States, Boolean> states = new HashMap<States, Boolean>();
+    public static Map<States, Boolean> states = new HashMap<>();
     static {states.put(States.ACTIVE, false);}
+
     public Boolean isActive() { return states.get(States.ACTIVE);}
     public void setActive(Boolean b) {states.put(States.ACTIVE, b);}
 
@@ -54,32 +55,18 @@ public class Ball {
     private final SpriteBatch batch;
     private final BitmapFont font;
 
-    private boolean debug = false;
-
-    private final Pool<Rectangle> rectPool = new Pool<Rectangle>() {
-        @Override
-        protected Rectangle newObject()
-        {
-            return new Rectangle();
-        }
-    };
+    private Rectangle rect = new Rectangle();
 
     public Ball(Board board)
     {
         this.board = board;
         this.ballSpeed = SPEED;
-
         this.setActive(false);
-        this.position = this.board.paddle.getBallPosition();
+        this.position = this.board.paddle.getBallOriginPosition();
         this.bounds = new Rectangle(this.position.x, this.position.y, SIZE, SIZE);
         this.renderer = new ShapeRenderer();
-
-
-        // local debugging properties
-
         this.batch = new SpriteBatch();
         this.font = new BitmapFont();
-
     }
 
     public void render(SpriteBatch batch, OrthographicCamera cam)
@@ -104,7 +91,7 @@ public class Ball {
 
             this.velocity.add(this.acceleration.x, this.acceleration.y);
             this.capVelocity();
-            // has the ball gone off the screen, (dropped from the bottom?)
+            // has the ball gone off the screen?
             if (this.position.y < 0 || this.position.y > Board.BOARD_HEIGHT)
             {
                 // remove a ball from the player
@@ -122,60 +109,43 @@ public class Ball {
         }
         else // it's not active, it should be "attached" to the paddle
         {
-            this.position.x = this.board.paddle.getBallPosition().x;
-            this.position.y = this.board.paddle.getBallPosition().y;
+            this.position.x = this.board.paddle.getBallOriginPosition().x;
+            this.position.y = this.board.paddle.getBallOriginPosition().y;
             this.bounds.setX(this.position.x);
             this.bounds.setY(this.position.y);
         }
-        if (this.debug)
+        if (Breakout.DEBUG)
         {
             this.debugBall();
         }
 
     }
 
-    public void reset()
-    {
-        this.setActive(false);
-
-        this.getPosition().x = this.board.paddle.getBallPosition().x;
-        this.getPosition().y = this.board.paddle.getBallPosition().y;
-        this.bounds.x = this.position.x;
-        this.bounds.y = this.position.y;
-        this.velocity.x = 0f;
-        this.velocity.y = 0f;
-        this.acceleration.x = 0f;
-        this.acceleration.y = 0f;
-        this.max_vel = 5f;
-
-    }
-
     private void collides(float delta)
     {
         this.velocity.scl(delta);
-        Rectangle r = rectPool.obtain();
 
-        r.set(this.bounds);
+        rect.set(this.bounds);
 
-        r.x += this.velocity.x;
+        rect.x += this.velocity.x;
 
         // bounce off walls
-        for (Wall wall : this.board.walls.getBlocks())
+        for (Wall wall : this.board.walls.getWalls())
         {
-            if (r.overlaps(wall.getBounds()))
+            if (rect.overlaps(wall.getBounds()))
             {
                 // walls have names, bricks don't
                 if (wall.getName().equals("left") || wall.getName().equals("right"))
                 {
                     this.direction_x *= -1;
                     this.velocity.x = -this.velocity.x;
-                    this.acceleration.x = this.direction_x * 1f;
+                    this.acceleration.x = this.direction_x * 0.5f;
                 }
                 if (wall.getName().equals("top"))
                 {
                     this.direction_y *= -1;
                     this.velocity.y = -this.velocity.y;
-                    this.acceleration.y = this.direction_y * 1f;
+                    this.acceleration.y = this.direction_y * 0.5f;
                 }
                 break;
             }
@@ -189,22 +159,23 @@ public class Ball {
         // detected brick collisions
         for (Brick brick : this.board.bricks.getBlocks())
         {
-            if (r.overlaps(brick.getBounds()) && !brick.isDestroyed())
+            if (rect.overlaps(brick.getBounds()) && !brick.isDestroyed())
             {
                 brick.setDestroyed(true);
                 this.max_vel += .5f;
                 this.board.player_score += 100 * this.max_vel;
 
-                //this.sound.play(1f);
+                // Possible Sound play
 
+                // Another brick has been destroyed
                 this.board.destroyedBricks = this.board.destroyedBricks + 1;
                 this.direction_x *= 1;
                 this.acceleration.x = this.direction_x * this.velocity.x;
 
+                // Change Direction after hit
                 this.direction_y *= -1;
                 this.velocity.y = -this.velocity.y;
                 this.acceleration.y += this.direction_y;
-
             }
             else
             {
@@ -213,21 +184,22 @@ public class Ball {
             }
         }
 
-        if (r.overlaps(this.board.paddle.getBounds()))
+        // Hit Paddle
+        if (rect.overlaps(this.board.paddle.getBounds()))
         {
-
             this.direction_y *= -1f;
             this.velocity.y = -this.velocity.y;
             this.acceleration.y = this.direction_y * 1f;
 
-            if (this.board.destroyedBricks == this.board.bricks.getBlocks().length)
+            if (this.board.destroyedBricks == this.board.bricks.getBlocks().size())
             {
                 this.board.blnFinished = true;
             }
         }
 
-        r.x = this.position.x;
-        r.y = this.position.y;
+        // Making sure the bounds are updated
+        rect.x = this.position.x;
+        rect.y = this.position.y;
         this.position.add(this.velocity);
         this.bounds.setX(this.position.x);
         this.bounds.setY(this.position.y);
@@ -235,6 +207,7 @@ public class Ball {
         this.velocity.scl(1 / delta);
     }
 
+    // Makes sure that the max velocity gets forced
     private void capVelocity()
     {
         if(this.velocity.y > this.max_vel)
@@ -255,8 +228,8 @@ public class Ball {
         }
     }
 
-    private void debugBall()
-    {
+    // Debug information for ball position, velocity, acceleration
+    private void debugBall() {
         this.batch.begin();
         this.font.setColor(Color.WHITE);
         this.font.draw(this.batch, "Ball: ", 20f, 120f);
@@ -264,12 +237,5 @@ public class Ball {
         this.font.draw(this.batch, "position: " + this.position, 20f, 80f);
         this.font.draw(this.batch, "acceleration: " + this.acceleration, 20f, 60f);
         this.batch.end();
-    }
-
-    public Vector2 getBallPosition()
-    {
-        float x = this.position.x + (this.bounds.width / 2) - Ball.SIZE / 2;
-        float y = this.bounds.y + this.bounds.height;
-        return new Vector2(x,y);
     }
 }

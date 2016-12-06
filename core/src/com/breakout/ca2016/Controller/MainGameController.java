@@ -54,8 +54,14 @@ public class MainGameController implements InputProcessor {
         }
 
         if( keycode == Input.Keys.F1) {
-            if(!Breakout.DEBUG) Breakout.DEBUG = true;
-            if(Breakout.DEBUG) Breakout.DEBUG = false;
+            if(!Breakout.DEBUG) {
+                Breakout.DEBUG = true;
+                return true;
+            }
+            if(Breakout.DEBUG) {
+                Breakout.DEBUG = false;
+                return true;
+            }
         }
 
         if (keycode == Input.Keys.SPACE) {

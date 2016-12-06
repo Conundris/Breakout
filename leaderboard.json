@@ -24,4 +24,22 @@
 	userName: test
 	score: 4050
 }
+{
+	class: com.breakout.ca2016.Entities.Player
+	userName: ""
+}
+{
+	class: com.breakout.ca2016.Entities.Player
+	userName: ""
+}
+{
+	class: com.breakout.ca2016.Entities.Player
+	userName: stuff
+	score: 4950
+}
+{
+	class: com.breakout.ca2016.Entities.Player
+	userName: ""
+	score: 750
+}
 ]
