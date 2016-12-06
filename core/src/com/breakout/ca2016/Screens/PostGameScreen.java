@@ -120,6 +120,15 @@ public class PostGameScreen implements Screen {
         stage.clear();
     }
 
+    /*****************************************************
+     *    Title: Java Code Examples for com.badlogic.gdx.scenes.scene2d.ui.Skin.getFont() - Example 3
+     *    Author: Programcreek
+     *    Site owner/sponsor: http://www.programcreek.com/
+     *    Date: 2016
+     *    Code version: edited Jan 10 '13 at 17:42
+     *    Availability: http://www.programcreek.com/java-api-examples/index.php?class=com.badlogic.gdx.scenes.scene2d.ui.Skin&method=getFont (Accessed 23 November 2016)
+     *    Modified: Only taken needed code, changed color.
+     *****************************************************/
     public void CreateSkin(){
         skin = new Skin();
         skin.add("default", font);
