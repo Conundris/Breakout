@@ -1,45 +1,7 @@
 [
 {
 	class: com.breakout.ca2016.Entities.Player
-	userName: exceeds
-	score: 2500
-}
-{
-	class: com.breakout.ca2016.Entities.Player
-	userName: exceeds
-	score: 550
-}
-{
-	class: com.breakout.ca2016.Entities.Player
-	userName: slackceeds
-	score: 550
-}
-{
-	class: com.breakout.ca2016.Entities.Player
-	userName: test
-	score: 1150
-}
-{
-	class: com.breakout.ca2016.Entities.Player
-	userName: test
-	score: 4050
-}
-{
-	class: com.breakout.ca2016.Entities.Player
-	userName: ""
-}
-{
-	class: com.breakout.ca2016.Entities.Player
-	userName: ""
-}
-{
-	class: com.breakout.ca2016.Entities.Player
-	userName: stuff
-	score: 4950
-}
-{
-	class: com.breakout.ca2016.Entities.Player
-	userName: ""
-	score: 750
+	userName: Tre
+	score: 2850
 }
 ]
