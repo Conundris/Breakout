@@ -1,8 +1,9 @@
-package com.breakout.ca2016.Entities;
+package com.breakout.ca2016.Singleton;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.Json;
+import com.breakout.ca2016.Entities.Player;
 
 import java.util.ArrayList;
 

@@ -10,8 +10,8 @@ import com.badlogic.gdx.math.Vector2;
 import java.util.ArrayList;
 
 /**
- * <h1>Paddle<h1/>
- * The Paddle Class defines a paddle in the @{@Link Board}.
+ * Paddle
+ * The Paddle Class defines a paddle.
  *
  * @author  Jason Brockett
  * @version 1.0
@@ -20,7 +20,7 @@ import java.util.ArrayList;
 public class Paddle
 {
     /**
-     * Board Reference @{@link Board}
+     * Board Reference @{@link Board#Board}
      */
     private final Board board;
 
@@ -34,7 +34,7 @@ public class Paddle
     private final float HEIGHT = .25f;
 
     /**
-     * Renderer used to display paddle @{@link ShapeRenderer}
+     * Renderer used to display paddle @{@link ShapeRenderer#Renderer}
      */
     private final ShapeRenderer renderer;
 
@@ -101,8 +101,8 @@ public class Paddle
     /**
      * This method renders the paddle on the screen.
      *
-     * @param batch @{@link SpriteBatch} batch used to render the paddle.
-     * @param cam @{@Link OrthographicCamera} displays the content on the screen.
+     * @param batch {@link SpriteBatch#SpriteBatch} batch used to render the paddle.
+     * @param cam {@link OrthographicCamera#OrthographicCamera} Camera displays the content on the screen.
      */
     public void render(SpriteBatch batch, OrthographicCamera cam)
     {
