@@ -12,6 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.breakout.ca2016.Breakout;
 import com.breakout.ca2016.Entities.Player;
+import com.breakout.ca2016.LeaderBoard.LeaderBoard;
 import com.breakout.ca2016.ScreenType;
 import com.breakout.ca2016.Singleton.LeaderBoardLegacy;
 import com.breakout.ca2016.Utils.SkinUtils;
@@ -50,11 +51,12 @@ public class LeaderBoardScreen implements Screen {
         // Create UI elements
         Label lblTitle = new Label("Leaderboard", skin);
         TextButton btnContinueButton = new TextButton("Continue", skin);
+        TextButton btnTest = new TextButton("TestCall API", skin);
 
         // Add UI elements to table
         table.add(lblTitle).spaceBottom(25).row();
 
-        //Get List of Playerss
+        //Get List of Players
         ArrayList<Player> players = LeaderBoardLegacy.getInstance().getLeaderBoard();
 
         // Create UI elements and add them to the table for correct displaying
@@ -69,9 +71,24 @@ public class LeaderBoardScreen implements Screen {
 
         // Add Continue Button at them
         table.add(btnContinueButton).spaceTop(30);
+        table.add(btnTest).spaceTop(30);
 
         // Add UI elements directly to Stage
         stage.addActor(table);
+
+        //Listeners for Buttons
+        btnTest.addListener(new ClickListener() {
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                return true;
+            }
+
+
+            @Override
+            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+                new LeaderBoard().test();
+            }
+        });
 
         btnContinueButton.addListener(new ClickListener() {
             @Override
