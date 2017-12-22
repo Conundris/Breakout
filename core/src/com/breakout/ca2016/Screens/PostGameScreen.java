@@ -12,6 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.breakout.ca2016.Breakout;
+import com.breakout.ca2016.LeaderBoard.LeaderBoard;
 import com.breakout.ca2016.ScreenType;
 import com.breakout.ca2016.Singleton.LeaderBoardLegacy;
 import com.breakout.ca2016.Utils.SkinUtils;
@@ -64,6 +65,7 @@ public class PostGameScreen implements Screen {
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
                 if(txtPlayerName.getText() != "" && !txtPlayerName.getText().trim().isEmpty()) {
                     game.player.setUserName(txtPlayerName.getText());
+                    LeaderBoard.getInstance().CreateEntry(game.player);
                     LeaderBoardLegacy.getInstance().addPlayer(game.player);
                     game.player = null;
 

@@ -16,10 +16,10 @@ public class LeaderBoardLegacy {
 
     public ArrayList<Player> players;
 
-    private static LeaderBoardLegacy ourInstance = new LeaderBoardLegacy();
+    private static LeaderBoardLegacy Instance = new LeaderBoardLegacy();
 
     public static LeaderBoardLegacy getInstance() {
-        return ourInstance;
+        return Instance;
     }
 
     private LeaderBoardLegacy() {

@@ -56,8 +56,11 @@ public class LeaderBoardScreen implements Screen {
         // Add UI elements to table
         table.add(lblTitle).spaceBottom(25).row();
 
+        //Load Players from API
+        LeaderBoard.getInstance().getLeaderBoard();
+
         //Get List of Players
-        ArrayList<Player> players = LeaderBoardLegacy.getInstance().getLeaderBoard();
+        ArrayList<Player> players = LeaderBoard.getInstance().players;
 
         // Create UI elements and add them to the table for correct displaying
         for (Player player: players) {
@@ -71,13 +74,13 @@ public class LeaderBoardScreen implements Screen {
 
         // Add Continue Button at them
         table.add(btnContinueButton).spaceTop(30);
-        table.add(btnTest).spaceTop(30);
+        //table.add(btnTest).spaceTop(30);
 
         // Add UI elements directly to Stage
         stage.addActor(table);
 
         //Listeners for Buttons
-        btnTest.addListener(new ClickListener() {
+        /*btnTest.addListener(new ClickListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 return true;
@@ -88,7 +91,7 @@ public class LeaderBoardScreen implements Screen {
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
                 new LeaderBoard().test();
             }
-        });
+        });*/
 
         btnContinueButton.addListener(new ClickListener() {
             @Override
