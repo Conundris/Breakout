@@ -7,7 +7,7 @@ import com.breakout.ca2016.Entities.Player;
 
 import java.util.ArrayList;
 
-public class LeaderBoard {
+public class LeaderBoardLegacy {
 
     private Json json;
     // Handles the local File for Leaderboard, description of Local:
@@ -16,13 +16,13 @@ public class LeaderBoard {
 
     public ArrayList<Player> players;
 
-    private static LeaderBoard ourInstance = new LeaderBoard();
+    private static LeaderBoardLegacy ourInstance = new LeaderBoardLegacy();
 
-    public static LeaderBoard getInstance() {
+    public static LeaderBoardLegacy getInstance() {
         return ourInstance;
     }
 
-    private LeaderBoard() {
+    private LeaderBoardLegacy() {
         players = new ArrayList<>();
         json = new Json();
     }

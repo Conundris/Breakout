@@ -4,4 +4,14 @@
 	userName: Tre
 	score: 2850
 }
+{
+	class: com.breakout.ca2016.Entities.Player
+	userName: test
+	score: 1200
+}
+{
+	class: com.breakout.ca2016.Entities.Player
+	userName: wda
+	score: 750
+}
 ]

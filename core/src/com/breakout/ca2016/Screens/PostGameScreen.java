@@ -12,8 +12,9 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.breakout.ca2016.Breakout;
-import com.breakout.ca2016.Singleton.LeaderBoard;
 import com.breakout.ca2016.ScreenType;
+import com.breakout.ca2016.Singleton.LeaderBoardLegacy;
+import com.breakout.ca2016.Utils.SkinUtils;
 
 /**
  * Created by t00191944 on 29/11/2016.
@@ -22,20 +23,18 @@ public class PostGameScreen implements Screen {
 
     private Breakout game;
     private Skin skin;
-    private BitmapFont font;
     private Stage stage;
     private Table table;
 
     public PostGameScreen(Breakout game) {
         this.game = game;
-        this.font = new BitmapFont();
 
         table = new Table();
         table.setFillParent(true);
 
         stage = new Stage();
 
-        CreateSkin();
+        skin = SkinUtils.CreateSkin();
     }
 
     // Create Formitems and add them to the stage
@@ -65,7 +64,7 @@ public class PostGameScreen implements Screen {
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
                 if(txtPlayerName.getText() != "" && !txtPlayerName.getText().trim().isEmpty()) {
                     game.player.setUserName(txtPlayerName.getText());
-                    LeaderBoard.getInstance().addPlayer(game.player);
+                    LeaderBoardLegacy.getInstance().addPlayer(game.player);
                     game.player = null;
 
                     game.setScreen(game.getScreenType(ScreenType.MainMenu));
@@ -118,44 +117,5 @@ public class PostGameScreen implements Screen {
     public void dispose() {
         table.clear();
         stage.clear();
-    }
-
-    /*
-         Title: Java Code Examples for com.badlogic.gdx.scenes.scene2d.ui.Skin.getFont() - Example 3
-         Author: Programcreek
-         Site owner/sponsor: http://www.programcreek.com/
-         Date: 2016
-         Code version: edited Jan 10 '13 at 17:42
-         Availability: http://www.programcreek.com/java-api-examples/index.php?class=com.badlogic.gdx.scenes.scene2d.ui.Skin&method=getFont (Accessed 23 November 2016)
-         Modified: Only taken needed code, changed color.
-     */
-    public void CreateSkin(){
-        skin = new Skin();
-        skin.add("default", font);
-
-        //Create a texture
-        Pixmap pixmap = new Pixmap(Gdx.graphics.getWidth() /4, Gdx.graphics.getHeight() /11, Pixmap.Format.RGB888);
-        pixmap.setColor(Color.WHITE);
-        pixmap.fill();
-        skin.add("background",new Texture(pixmap));
-
-        //Create a button style
-        TextButton.TextButtonStyle textButtonStyle = new TextButton.TextButtonStyle();
-        textButtonStyle.up = skin.newDrawable("background", Color.GRAY);
-        textButtonStyle.down = skin.newDrawable("background", Color.DARK_GRAY);
-        textButtonStyle.checked = skin.newDrawable("background", Color.DARK_GRAY);
-        textButtonStyle.over = skin.newDrawable("background", Color.LIGHT_GRAY);
-        textButtonStyle.font = skin.getFont("default");
-        skin.add("default", textButtonStyle);
-
-        Label.LabelStyle labelStyle = new Label.LabelStyle();
-        labelStyle.font = skin.getFont("default");
-        skin.add("default", labelStyle);
-
-        TextField.TextFieldStyle textFieldStyle = new TextField.TextFieldStyle();
-        textFieldStyle.font = skin.getFont("default");
-        textFieldStyle.fontColor = Color.WHITE;
-        textFieldStyle.background = skin.newDrawable("background", Color.GRAY);
-        skin.add("default", textFieldStyle);
     }
 }

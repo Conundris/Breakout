@@ -2,12 +2,12 @@ package com.breakout.ca2016;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Screen;
-import com.breakout.ca2016.Singleton.LeaderBoard;
 import com.breakout.ca2016.Entities.Player;
 import com.breakout.ca2016.Screens.LeaderBoardScreen;
 import com.breakout.ca2016.Screens.MainGameScreen;
 import com.breakout.ca2016.Screens.MainMenuScreen;
 import com.breakout.ca2016.Screens.PostGameScreen;
+import com.breakout.ca2016.Singleton.LeaderBoardLegacy;
 
 public class Breakout extends Game {
 
@@ -38,7 +38,7 @@ public class Breakout extends Game {
 	@Override
 	public void create () {
 		// Initalise & load Leaderboard
-		LeaderBoard leaderBoard = LeaderBoard.getInstance();
+		LeaderBoardLegacy leaderBoard = LeaderBoardLegacy.getInstance();
 		leaderBoard.loadLeaderBoard();
 
 		// Creating Screens
